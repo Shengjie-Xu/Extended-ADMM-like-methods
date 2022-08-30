@@ -5,7 +5,17 @@ These are associated Matlab codes for the paper
 [Bingsheng He, Shengjie Xu, Xiaoming Yuan: Extensions of ADMM for Separable Convex Optimization Problems with Linear Equality or Inequality Constraints, 	arXiv:2107.01897 https://arxiv.org/abs/2107.01897]
 
 It includes the following specific application problems:
+
 > Linear programming 
 
-> Quadrtic programming 
-> 
+> Qudratic programming 
+
+> Least square problems
+
+> Support vector machine
+
+> Sparse inverse covariance selection
+
+> Least absolute deviations fitting 
+
+> L_1 regularized logistic regression 
