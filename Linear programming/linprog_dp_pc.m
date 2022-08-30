@@ -1,5 +1,5 @@
 function [z, history] = linprog_dp_pc(c, A, b, rho)
-% Solves the following problem via ADMM:
+% Solve the following problem via the dual-primal extended ADMM:
 %
 %   minimize     c'*x
 %   subject to   Ax = b, x >= 0
@@ -24,15 +24,14 @@ if ~QUIET
 end
 
 for k = 1:MAX_ITER
-    
+
+    % prediction step    
     uu = u - rho*(x - z);
-    % x-update
     tmp = [ rho*eye(n), A'; A, zeros(m) ] \ [ rho*x + uu - c; b ];
     xx = tmp(1:n);
-
-    % z-update with relaxation
-    zold = z;
-    zz = pos(xx-x+zold - uu/rho);
+    zz = pos(xx-x+z - uu/rho);
+    
+    % correction step
     u=uu+rho*(x-xx+zz-z);
     x=x-nu*(x-xx+z-zz);
     z=z+nu*(zz-z);
