@@ -1,12 +1,10 @@
 function [z, history] = linprog_dp_pc(c, A, b, rho)
-% Solves the following problem via ADMM:
+% Solves the following problem via dual-primal extended ADMM:
 %
 %   minimize     c'*x
 %   subject to   Ax = b, x >= 0
-% More information can be found in the paper linked at:
-% http://www.stanford.edu/~boyd/papers/distr_opt_stat_learning_admm.html
 %
-nu=0.99;
+nu=0.99;  
 t_start = tic;
 QUIET    = 0;
 MAX_ITER = 1000;
@@ -25,14 +23,16 @@ end
 
 for k = 1:MAX_ITER
     
+    % prediction step
+    % u-update
     uu = u - rho*(x - z);
     % x-update
     tmp = [ rho*eye(n), A'; A, zeros(m) ] \ [ rho*x + uu - c; b ];
     xx = tmp(1:n);
-
-    % z-update with relaxation
+    % z-update 
     zold = z;
     zz = pos(xx-x+zold - uu/rho);
+    % correction step
     u=uu+rho*(x-xx+zz-z);
     x=x-nu*(x-xx+z-zz);
     z=z+nu*(zz-z);
@@ -40,7 +40,6 @@ for k = 1:MAX_ITER
     % diagnostics, reporting, termination checks
 
     history.objval(k)  = objective(c, x);
-
     history.r_norm(k)  = norm(x - z);
     history.s_norm(k)  = norm(-rho*(z - zold));
 

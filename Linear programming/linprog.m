@@ -28,16 +28,16 @@ for k = 1:MAX_ITER
     tmp = [ rho*eye(n), A'; A, zeros(m) ] \ [ rho*z + u - c; b ];
     x = tmp(1:n);
 
-    % z-update with relaxation
+    % z-update 
     zold = z;
     z = pos(x - u/rho);
-
+    
+    % u-update 
     u = u - rho*(x - z);
 
     % diagnostics, reporting, termination checks
 
     history.objval(k)  = objective(c, x);
-
     history.r_norm(k)  = norm(x - z);
     history.s_norm(k)  = norm(-rho*(z - zold));
 
