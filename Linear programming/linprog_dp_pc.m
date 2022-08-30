@@ -1,9 +1,6 @@
 function [z, history] = linprog_dp_pc(c, A, b, rho)
-<<<<<<< HEAD
-% Solves the following problem via dual-primal extended ADMM:
-=======
+
 % Solve the following problem via the dual-primal extended ADMM:
->>>>>>> 744ec3c876f595d8c969dd6c38aaf3dd4948d061
 %
 %   minimize     c'*x
 %   subject to   Ax = b, x >= 0
@@ -26,25 +23,15 @@ if ~QUIET
 end
 
 for k = 1:MAX_ITER
-<<<<<<< HEAD
     
     % prediction step
     % u-update
-=======
-
-    % prediction step    
->>>>>>> 744ec3c876f595d8c969dd6c38aaf3dd4948d061
     uu = u - rho*(x - z);
     tmp = [ rho*eye(n), A'; A, zeros(m) ] \ [ rho*x + uu - c; b ];
     xx = tmp(1:n);
-<<<<<<< HEAD
     % z-update 
     zold = z;
     zz = pos(xx-x+zold - uu/rho);
-=======
-    zz = pos(xx-x+z - uu/rho);
-    
->>>>>>> 744ec3c876f595d8c969dd6c38aaf3dd4948d061
     % correction step
     u=uu+rho*(x-xx+zz-z);
     x=x-nu*(x-xx+z-zz);

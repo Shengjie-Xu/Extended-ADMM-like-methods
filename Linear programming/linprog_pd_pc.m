@@ -25,16 +25,16 @@ for k = 1:MAX_ITER
     % prediction step
     % x-update
     tmp = [ rho*eye(n), A'; A, zeros(m) ] \ [ rho*x + u - c; b ];
-    xx = tmp(1:n);
+    xx  = tmp(1:n);
     % z-update 
     zold = z;
     zz = pos(xx-x+zold - u/rho);
     % u-update
     uu = u - rho*(xx - zz);
-    u=uu+nu*rho*(x-xx);
+    u  = uu+nu*rho*(x-xx);
     % correction step
-    x=x-nu*(x-xx+z-zz);
-    z=z+nu*(zz-z);
+    x = x-nu*(x-xx+z-zz);
+    z = z+nu*(zz-z);
     
     % diagnostics, reporting, termination checks
 
