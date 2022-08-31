@@ -20,4 +20,4 @@ It includes the following specific application problems:
 
 > L_1 regularized logistic regression 
 
-> Imaging processing: denosing and deblurring
+> Imaging processing: denosing and deblurring with total variation 
