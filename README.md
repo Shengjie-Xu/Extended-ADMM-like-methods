@@ -19,3 +19,5 @@ It includes the following specific application problems:
 > Least absolute deviations fitting 
 
 > L_1 regularized logistic regression 
+
+> Imaging processing: denosing and deblurring
